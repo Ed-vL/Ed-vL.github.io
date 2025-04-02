@@ -59,4 +59,4 @@ def get_processed_file(filename):
     return send_file(os.path.join(PROCESSED_FOLDER, filename))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=False)
+    app.run(host="0.0.0.0", port=10000)  # Use port 10000 for Render
