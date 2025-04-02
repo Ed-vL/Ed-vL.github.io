@@ -46,8 +46,8 @@ def process():
         return jsonify({"error": "Invalid image format"}), 400
 
     return jsonify({
-        "original": f"http://127.0.0.1:5000/uploads/{file.filename}",
-        "processed": f"http://127.0.0.1:5000/processed/processed.png"
+        "original": f"https://egg-counter-github-io.onrender.com/uploads/{file.filename}",
+        "processed": f"https://egg-counter-github-io.onrender.com/processed/processed.png"
     })
 
 @app.route("/uploads/<filename>")
