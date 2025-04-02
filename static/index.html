@@ -133,7 +133,7 @@
             const formData = new FormData();
             formData.append("image", selectedFile);
 
-            fetch("http://127.0.0.1:5000/process", {
+            fetch("https://egg-counter-github-io.onrender.com/process", {
                 method: "POST",
                 body: formData,
             })
