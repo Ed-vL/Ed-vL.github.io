@@ -27,7 +27,7 @@ def process_image(image_path):
 @app.route("/")
 def serve_index():
     """Serve index.html"""
-    return send_from_directory("static", "static/index.html")
+    return send_from_directory("static", "index.html")
 
 @app.route("/process", methods=["POST"])
 def process():
