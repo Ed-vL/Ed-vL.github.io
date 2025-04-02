@@ -46,7 +46,7 @@
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
         }
         button {
-            background-color: #28a745;
+            background-color: #007bff;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -57,7 +57,7 @@
             transition: 0.3s;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #0056b3;
         }
         .hidden {
             display: none;
@@ -69,10 +69,11 @@
     <h1>Image Processor</h1>
     <div class="upload-container">
         <div class="drag-area" id="drag-area">
-            <p>Drag & Drop an Image or Click to Upload</p>
+            <p>Drag & Drop an Image or Click to Select</p>
             <input type="file" id="file-input" accept="image/*" class="hidden">
         </div>
         <button id="upload-btn">Upload</button>
+        <button id="process-btn" class="hidden">Process</button>
     </div>
 
     <div class="image-preview" id="image-preview" style="display: none;">
@@ -84,6 +85,7 @@
         const dragArea = document.getElementById("drag-area");
         const fileInput = document.getElementById("file-input");
         const uploadBtn = document.getElementById("upload-btn");
+        const processBtn = document.getElementById("process-btn");
         let selectedFile = null;
 
         // Drag & Drop Events
@@ -103,30 +105,35 @@
             if (selectedFile) {
                 fileInput.files = e.dataTransfer.files;
                 dragArea.innerHTML = `<p>${selectedFile.name}</p>`;
+                processBtn.classList.remove("hidden");  // Show process button
             }
         });
 
-        // Click to Upload
+        // Click to Select File
         dragArea.addEventListener("click", () => fileInput.click());
 
         fileInput.addEventListener("change", () => {
             selectedFile = fileInput.files[0];
             if (selectedFile) {
                 dragArea.innerHTML = `<p>${selectedFile.name}</p>`;
+                processBtn.classList.remove("hidden");  // Show process button
             }
         });
 
-        // Upload File
-        uploadBtn.addEventListener("click", () => {
+        // Upload Button - Open File Explorer
+        uploadBtn.addEventListener("click", () => fileInput.click());
+
+        // Process Image
+        processBtn.addEventListener("click", () => {
             if (!selectedFile) {
-                alert("Please select a file first!");
+                alert("Please select an image first!");
                 return;
             }
 
             const formData = new FormData();
             formData.append("image", selectedFile);
 
-            fetch("https://egg-counter-github-io.onrender.com/process", {
+            fetch("http://127.0.0.1:5000/process", {
                 method: "POST",
                 body: formData,
             })
